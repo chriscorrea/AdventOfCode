@@ -1,6 +1,6 @@
 from functools import reduce
 
-file = open('day1.txt')
+file = open('../inputs/day1.txt')
 data = file.read()
 
 #create list of elves, each item containing string of snack values
