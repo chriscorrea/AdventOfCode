@@ -10,7 +10,7 @@ data = file.read().split("\n")
 PRIORITY = string.ascii_lowercase + string.ascii_uppercase
 
 #Part 1: Break rucksacks up into two compartments
-rucksacks = list(map(lambda x: [x[:int(len(x)/2)], x[int(len(x)/2):]], data))
+rucksacks = list(map(lambda x: [x[:len(x)//2], x[len(x)//2:]], data))
 
 #Part 2: Build sets of three rucksacks per gang of elves
 elfGangs = []
