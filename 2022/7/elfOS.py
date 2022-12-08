@@ -27,12 +27,12 @@ for x in data.splitlines():
             fs = int(match.groups()[0])
             # Add fs value to all directories in tree
             for i in range(len(location)+1):
-                print(f"Adding {fs} ... to ")
                 files["/".join(location[:i])] += fs
 
 
 # Part 1: All directories with total size < 100,000 
-print(f"Part 1 Solution: {sum([v if v<100000 else 0 for i,v in files.items()])}")
+print(f"Part 1 Solution: {sum([v if v<100000 else 0 for k,v in files.items()])}")
 
-# Part 2: 
-print(f"")
+# Part 2: Free up 3,000,0000 by deleting one directory
+targetBytes = 30000000-(70000000 - sum([v if bool(re.search('\/\/[A-z]+$', k)) else 0 for k,v in files.items()]))
+print(f"Part 2 Solution: {min([v if v>=targetBytes else 99999999 for k,v in files.items()])}")
