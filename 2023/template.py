@@ -16,7 +16,7 @@ def solve_part2(data: List[str]) -> int:
 # Main function
 def main() -> None:
     # Read input file
-    data: List[str] = open('../inputs/day4.txt').read().splitlines()
+    data: List[str] = open('./2023/inputs/day4.txt').read().splitlines()
     
     # Solve Part 1
     print(f"Part 1: {solve_part1(data)}")
