@@ -1,49 +1,43 @@
-# Advent of Code 2023 - Day 
+# Advent of Code 2023 - Day 8 https://adventofcode.com/2023/day/8
 # Author: Chris Correa 
 
 from typing import List
 from itertools import cycle
+from math import lcm 
 
 # Part 1
 def solve_part1(instructions, coords) -> int:
-    # TODO
     step: int = 0
     idx: str = 'AAA'
     looped_instructions = cycle(instructions)
     while(True):
         step += 1
         instruct = next(looped_instructions)
-        print(f"{step}: {idx} then {instruct}")
         idx = coords[idx][instruct]
         if idx == 'ZZZ':
             return step
-        
 
 # Part 2
 def solve_part2(instructions, coords, acoords) -> int:
+    # As it happens, each ..A only reaches one ..Z per cycle. 
+    # So we can find the cycle length for each starting point
+    # and find the answer via least common multiple
+
     results: dict = {}
 
     for a in acoords:
-        print('### ' + a)
+        steps: int = 0
         idx: str = a
         looped_instructions = cycle(instructions)
-        results[a] = []
-
-        for i in range(100000): #arbitrary - surely this won't work 
+        while idx.endswith('Z') == False:
             instruct = next(looped_instructions)
             idx = coords[idx][instruct] 
-            if idx.endswith('Z'):
-                results[a].append(i)
-  
-    counts = {}
-    for k in results.keys():
-        for v in results[k]:
-            counts[v] = counts.get(v, 0) + 1
-    for k,v in counts.items():
-        if v==len(acoords):
-            return k
-    
-    return None
+            steps += 1
+        results[a] = steps
+
+    # Find the least common multiple of all cycle lengths
+    convergence: int = lcm(*list(results.values()))
+    return convergence
 
 # Main function
 def main() -> None:
